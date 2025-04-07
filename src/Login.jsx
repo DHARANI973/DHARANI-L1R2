@@ -4,11 +4,12 @@ import "./Login.css";
 
 const users = [
   { username: "dharani", password: "dharani@123", role: "Manager" },
-  { username: "lead1", password: "lead1@123", role: "Team lead" },
-  { username: "employee1", password: "employee1@123", role: "Emp" },
+  { username: "lead1", password: "lead1@123", role: "TeamLead" },
+  { username: "lead2", password: "lead2@123", role: "TeamLead" },
+  { username: "lead3", password: "lead3@123", role: "TeamLead" },
 ];
 
-const LoginPage = () => {
+const LoginPage = ({ setLoggedInUser }) => {
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -30,9 +31,10 @@ const LoginPage = () => {
 
     setTimeout(() => {
       setLoading(false);
+      setLoggedInUser(user.username);
+
       if (user.role === "Manager") navigate("/manager");
-      else if (user.role === "Team lead") navigate("/teamlead");
-      else if (user.role === "Emp") navigate("/employee");
+      else if (user.role === "TeamLead") navigate("/lead", { state: { username: user.username } });
     }, 2000);
   };
 
@@ -42,8 +44,20 @@ const LoginPage = () => {
         <div className="login-box">
           <h1>Welcome Back!</h1>
           <form onSubmit={handleLogin}>
-            <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
-            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
             {error && <p className="error-message">{error}</p>}
             <button type="submit">Login</button>
           </form>
