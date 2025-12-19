@@ -80,7 +80,7 @@ const Manager = (props) => {
   return (
     <div className="dashboard">
       <nav className="navbar">
-        <h2>Manager Dashboard</h2>
+        <h2>Welcome to Manager Dashboard</h2>
         <div className="nav-links">
           <button onClick={() => navigate("/")}>Home</button>
           <button onClick={() => navigate("/login")}>Logout</button>
